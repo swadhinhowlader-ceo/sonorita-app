@@ -1,6 +1,5 @@
 package com.sonorita.assistant.ai
 
-import com.google.mlkit.nl.languageid.LanguageIdentification
 
 class EmotionDetector {
 

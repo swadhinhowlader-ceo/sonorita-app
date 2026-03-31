@@ -2,7 +2,7 @@ package com.sonorita.assistant.controllers
 
 import android.content.Context
 import android.accessibilityservice.AccessibilityServiceInfo
-import com.senorita.assistant.services.SonoritaAccessibilityService
+import com.sonorita.assistant.services.SonoritaAccessibilityService
 
 class AutopilotController(private val context: Context) {
 
