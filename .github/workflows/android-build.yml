@@ -1,0 +1,88 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'
+
+    - name: Create Gradle Wrapper
+      run: |
+        # Download gradle wrapper jar
+        mkdir -p gradle/wrapper
+        curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradle/wrapper/gradle-wrapper.jar
+        
+        # Create gradlew
+        cat > gradlew << 'EOF'
+        #!/bin/sh
+        APP_HOME=$(cd "$(dirname "$0")" && pwd)
+        exec java -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" "$@"
+        EOF
+        chmod +x gradlew
+
+    - name: Build debug APK
+      run: |
+        # Use gradle directly if wrapper fails
+        if [ -f "./gradlew" ]; then
+          ./gradlew assembleDebug --no-daemon --stacktrace
+        else
+          gradle assembleDebug --no-daemon --stacktrace
+        fi
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: sonorita-debug-apk
+        path: app/build/outputs/apk/debug/*.apk
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Setup Gradle
+      uses: gradle/actions/setup-gradle@v3
+
+    - name: Create Gradle Wrapper
+      run: |
+        mkdir -p gradle/wrapper
+        curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradle/wrapper/gradle-wrapper.jar
+        chmod +x gradlew
+
+    - name: Run lint
+      run: ./gradlew lint --no-daemon || true
+
+    - name: Upload lint results
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: lint-results
+        path: app/build/reports/lint-results*.html
