@@ -40,7 +40,7 @@ class AIEngine(private val context: Context, private val preferenceDao: Preferen
     )
 
     suspend fun query(prompt: String, conversationHistory: List<String> = emptyList()): AIResponse {
-        val queryType = QueryClassifier.classify(prompt)
+        val queryType = QueryClassifier.classify(prompt).type
         val providerConfig = getProviderConfig()
 
         return withContext(Dispatchers.IO) {

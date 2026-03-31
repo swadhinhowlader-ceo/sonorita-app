@@ -62,12 +62,12 @@ class OfflineAIEngine(
         "help" to "🆘 Available commands: flash on/off, wifi on/off, bluetooth on/off, volume up/down, battery, lock, time, date, screenshot, stop, start"
     )
 
-    fun enableOfflineMode() {
+    suspend fun enableOfflineMode() {
         isOfflineMode = true
         preferenceDao.set(PreferenceEntity("offline_mode", "true"))
     }
 
-    fun disableOfflineMode() {
+    suspend fun disableOfflineMode() {
         isOfflineMode = false
         preferenceDao.set(PreferenceEntity("offline_mode", "false"))
     }

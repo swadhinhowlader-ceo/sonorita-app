@@ -24,7 +24,7 @@ class LifeLogger(
 
     private val logEntries = mutableListOf<LifeLogEntry>()
 
-    fun log(type: LogType, content: String, metadata: Map<String, String> = emptyList().associate { "" to "" }, tags: List<String> = emptyList()) {
+    suspend fun log(type: LogType, content: String, metadata: Map<String, String> = emptyMap(), tags: List<String> = emptyList()) {
         val entry = LifeLogEntry(
             type = type,
             content = content,

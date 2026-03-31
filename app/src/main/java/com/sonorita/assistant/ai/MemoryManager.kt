@@ -1,6 +1,7 @@
 package com.sonorita.assistant.ai
 
 import com.sonorita.assistant.data.ConversationDao
+import com.sonorita.assistant.data.PreferenceEntity
 import com.sonorita.assistant.data.ConversationEntity
 import com.sonorita.assistant.data.PreferenceDao
 import kotlinx.coroutines.flow.first
