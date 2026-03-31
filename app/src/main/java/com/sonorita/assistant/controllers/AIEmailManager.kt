@@ -31,7 +31,6 @@ class AIEmailManager(
     private val blockedSenders = mutableSetOf<String>()
     private val importantContacts = mutableSetOf<String>()
 
-    init {
         val saved = preferenceDao.get("blocked_senders")
         if (saved != null) blockedSenders.addAll(saved.split(","))
         val savedImportant = preferenceDao.get("important_contacts")
@@ -107,12 +106,12 @@ class AIEmailManager(
         }
     }
 
-    fun blockSender(email: String) {
+    suspend fun blockSender(email: String) {
         blockedSenders.add(email)
         preferenceDao.set(PreferenceEntity("blocked_senders", blockedSenders.joinToString(",")))
     }
 
-    fun markImportant(email: String) {
+    suspend fun markImportant(email: String) {
         importantContacts.add(email)
         preferenceDao.set(PreferenceEntity("important_contacts", importantContacts.joinToString(",")))
     }

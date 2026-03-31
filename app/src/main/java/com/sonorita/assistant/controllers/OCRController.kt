@@ -2,14 +2,14 @@ package com.sonorita.assistant.controllers
 
 import android.content.Context
 import com.google.mlkit.vision.text.TextRecognition
-import com.google.mlkit.vision.text.TextRecognizer
-import com.google.mlkit.vision.text.bengali.BengaliTextRecognizerOptions
+
+// Bengali OCR removed
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
 
 class OCRController(private val context: Context) {
 
     private val bengaliRecognizer: TextRecognizer by lazy {
-        TextRecognition.getClient(BengaliTextRecognizerOptions.Builder().build())
+        TextRecognition.getClient(com.google.mlkit.vision.text.latin.TextRecognizerOptions.DEFAULT_BUILD)
     }
 
     private val englishRecognizer: TextRecognizer by lazy {

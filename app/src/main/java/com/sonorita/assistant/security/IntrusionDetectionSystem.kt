@@ -35,13 +35,13 @@ class IntrusionDetectionSystem(
     private val trustedNetworks = mutableSetOf<String>()
     private val knownSpamNumbers = mutableSetOf<String>()
 
-    init {
-        // Load trusted networks
+    suspend fun initialize() {
         val saved = preferenceDao.get("trusted_networks")
         if (saved != null) {
             trustedNetworks.addAll(saved.split(","))
         }
     }
+
 
     fun startMonitoring(): String {
         // Register for network changes
@@ -207,12 +207,12 @@ class IntrusionDetectionSystem(
         } catch (e: Exception) {}
     }
 
-    fun addTrustedNetwork(ssid: String) {
+    suspend fun addTrustedNetwork(ssid: String) {
         trustedNetworks.add(ssid)
         preferenceDao.set(PreferenceEntity("trusted_networks", trustedNetworks.joinToString(",")))
     }
 
-    fun addSpamNumber(number: String) {
+    suspend fun addSpamNumber(number: String) {
         knownSpamNumbers.add(number)
         preferenceDao.set(PreferenceEntity("spam_numbers", knownSpamNumbers.joinToString(",")))
     }

@@ -96,12 +96,12 @@ class VoiceIdentitySystem(
     }
 
     // Group chat mode
-    fun enableGroupMode() {
+    suspend fun enableGroupMode() {
         groupMode = true
         preferenceDao.set(PreferenceEntity("group_mode", "true"))
     }
 
-    fun disableGroupMode() {
+    suspend fun disableGroupMode() {
         groupMode = false
         preferenceDao.set(PreferenceEntity("group_mode", "false"))
     }
@@ -196,7 +196,7 @@ class VoiceIdentitySystem(
 
     fun isOwnerVoiceRegistered(): Boolean = ownerProfile != null
 
-    private fun loadProfiles() {
+    private suspend fun loadProfiles() {
         // Load from preferences/database
         val ownerName = preferenceDao.get("owner_voice_name")
         if (ownerName != null) {
@@ -214,7 +214,7 @@ class VoiceIdentitySystem(
         groupMode = preferenceDao.get("group_mode") == "true"
     }
 
-    private fun saveProfiles() {
+    private suspend fun saveProfiles() {
         ownerProfile?.let {
             preferenceDao.set(PreferenceEntity("owner_voice_name", it.name))
         }

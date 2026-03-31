@@ -58,15 +58,12 @@ class PrivateVPN(private val context: Context, private val preferenceDao: Prefer
         "segment.com"
     )
 
-    init {
-        loadBlocklists()
-    }
 
     fun prepareVPN(): Intent? {
         return VpnService.prepare(context)
     }
 
-    fun connectVPN(config: VPNConfig): String {
+    suspend fun connectVPN(config: VPNConfig): String {
         val prepareIntent = prepareVPN()
         if (prepareIntent != null) {
             return "🔒 VPN permission needed. Grant permission first."
@@ -81,7 +78,7 @@ class PrivateVPN(private val context: Context, private val preferenceDao: Prefer
         return "🔒 VPN connected to ${config.serverAddress} via ${config.protocol}!"
     }
 
-    fun disconnectVPN(): String {
+    suspend fun disconnectVPN(): String {
         isConnected = false
         preferenceDao.set(PreferenceEntity("vpn_connected", "false"))
 
