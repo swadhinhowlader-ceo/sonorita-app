@@ -74,7 +74,7 @@ dependencies {
     // implementation("com.google.mlkit:text-recognition-bengali:16.0.0") // Not available
     implementation("com.google.mlkit:face-detection:16.1.6")
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
-    implementation("com.google.mlkit:pose-detection:18.0.0-beta01") // Note: beta version
+    // implementation("com.google.mlkit:pose-detection:18.0.0-beta01") // Not available
     implementation("com.google.mlkit:translate:17.0.2")
     implementation("com.google.mlkit:language-id:17.0.4")
 
