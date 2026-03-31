@@ -71,10 +71,10 @@ dependencies {
 
     // ML Kit
     implementation("com.google.mlkit:text-recognition:16.0.0")
-    implementation("com.google.mlkit:text-recognition-bengali:16.0.0")
+    // implementation("com.google.mlkit:text-recognition-bengali:16.0.0") // Not available
     implementation("com.google.mlkit:face-detection:16.1.6")
     implementation("com.google.mlkit:barcode-scanning:17.2.0")
-    implementation("com.google.mlkit:pose-detection:18.0.0-beta01")
+    implementation("com.google.mlkit:pose-detection:18.0.0-beta01") // Note: beta version
     implementation("com.google.mlkit:translate:17.0.2")
     implementation("com.google.mlkit:language-id:17.0.4")
 
@@ -90,5 +90,4 @@ dependencies {
     implementation("androidx.biometric:biometric:1.1.0")
 
     // RecyclerView
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
 }
