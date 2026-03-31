@@ -5,6 +5,7 @@ on:
     branches: [ master, main ]
   pull_request:
     branches: [ master, main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,33 +21,21 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Setup Gradle
+    - name: Setup Gradle 8.5
       uses: gradle/actions/setup-gradle@v3
       with:
         gradle-version: '8.5'
 
-    - name: Create Gradle Wrapper
+    - name: Initialize Gradle Wrapper
       run: |
-        # Download gradle wrapper jar
-        mkdir -p gradle/wrapper
-        curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradle/wrapper/gradle-wrapper.jar
-        
-        # Create gradlew
-        cat > gradlew << 'EOF'
-        #!/bin/sh
-        APP_HOME=$(cd "$(dirname "$0")" && pwd)
-        exec java -jar "$APP_HOME/gradle/wrapper/gradle-wrapper.jar" "$@"
-        EOF
-        chmod +x gradlew
+        cd ${{ github.workspace }}
+        # Use gradle directly to generate wrapper
+        gradle wrapper --gradle-version 8.5
 
     - name: Build debug APK
       run: |
-        # Use gradle directly if wrapper fails
-        if [ -f "./gradlew" ]; then
-          ./gradlew assembleDebug --no-daemon --stacktrace
-        else
-          gradle assembleDebug --no-daemon --stacktrace
-        fi
+        cd ${{ github.workspace }}
+        ./gradlew assembleDebug --no-daemon --stacktrace
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
@@ -70,15 +59,18 @@ jobs:
 
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v3
+      with:
+        gradle-version: '8.5'
 
-    - name: Create Gradle Wrapper
+    - name: Initialize Gradle Wrapper
       run: |
-        mkdir -p gradle/wrapper
-        curl -L -o gradle/wrapper/gradle-wrapper.jar https://raw.githubusercontent.com/gradle/gradle/v8.5.0/gradle/wrapper/gradle-wrapper.jar
-        chmod +x gradlew
+        cd ${{ github.workspace }}
+        gradle wrapper --gradle-version 8.5
 
     - name: Run lint
-      run: ./gradlew lint --no-daemon || true
+      run: |
+        cd ${{ github.workspace }}
+        ./gradlew lint --no-daemon || true
 
     - name: Upload lint results
       uses: actions/upload-artifact@v4
