@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Sonorita</string>
+    <string name="sonorita_service_desc">Sonorita background service</string>
+    <string name="sonorita_accessibility_desc">Sonorita accessibility service for app control</string>
+    <string name="sonorita_notification_desc">Sonorita notification listener</string>
+</resources>

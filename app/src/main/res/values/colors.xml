@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_dark">#0A0A0F</color>
+    <color name="background_card">#151520</color>
+    <color name="accent_violet">#8B5CF6</color>
+    <color name="accent_cyan">#06B6D4</color>
+    <color name="text_white">#FFFFFF</color>
+    <color name="text_dim">#80FFFFFF</color>
+    <color name="status_active">#4CAF50</color>
+    <color name="status_sleep">#2196F3</color>
+    <color name="status_silent">#F44336</color>
+    <color name="status_thinking">#FFEB3B</color>
+    <color name="status_speaking">#00BCD4</color>
+    <color name="bubble_user_bg">#1A06B6D4</color>
+    <color name="bubble_ai_bg">#1A8B5CF6</color>
+</resources>

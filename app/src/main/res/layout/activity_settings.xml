@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0F">
+
+    <!-- Toolbar -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#151520"
+        app:titleTextColor="#FFFFFF"
+        app:navigationIcon="@drawable/ic_back"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/saveButton">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- System Prompt Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="System Prompt"
+                android:textColor="#8B5CF6"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/systemPromptEdit"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_bg"
+                android:gravity="top|start"
+                android:inputType="textMultiLine"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:padding="12dp" />
+
+            <!-- API Keys Section -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="API Keys"
+                android:textColor="#8B5CF6"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Gemini API Keys (comma separated)"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/geminiKeysEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_bg"
+                android:hint="key1, key2, key3"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#40FFFFFF"
+                android:textSize="14sp"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="OpenRouter API Keys"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/openrouterKeysEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_bg"
+                android:hint="key1, key2"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#40FFFFFF"
+                android:textSize="14sp"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Groq API Keys"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/groqKeysEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_bg"
+                android:hint="key1"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#40FFFFFF"
+                android:textSize="14sp"
+                android:padding="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="OpenAI API Keys"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <EditText
+                android:id="@+id/openaiKeysEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/edit_text_bg"
+                android:hint="key1"
+                android:inputType="text"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#40FFFFFF"
+                android:textSize="14sp"
+                android:padding="12dp" />
+
+            <!-- Voice Settings -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Voice Settings"
+                android:textColor="#8B5CF6"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Speed"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/voiceSpeedSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="0.5"
+                android:valueTo="2.0"
+                android:stepSize="0.1"
+                android:value="1.0"
+                app:thumbColor="#8B5CF6"
+                app:trackColorActive="#8B5CF6" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pitch"
+                android:textColor="#80FFFFFF"
+                android:textSize="12sp" />
+
+            <com.google.android.material.slider.Slider
+                android:id="@+id/voicePitchSlider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:valueFrom="0.5"
+                android:valueTo="2.0"
+                android:stepSize="0.1"
+                android:value="1.0"
+                app:thumbColor="#8B5CF6"
+                app:trackColorActive="#8B5CF6" />
+
+            <!-- Toggles -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Features"
+                android:textColor="#8B5CF6"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/wakeWordSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Wake Word (Hey Sonorita)"
+                android:textColor="#FFFFFF" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/bubbleSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Floating Bubble"
+                android:textColor="#FFFFFF" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/learningModeSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Learning Mode"
+                android:textColor="#FFFFFF" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/emotionDetectionSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Emotion Detection"
+                android:textColor="#FFFFFF" />
+
+            <!-- Unlock Code -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Unlock Code"
+                android:textColor="#8B5CF6"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/unlockCodeEdit"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/edit_text_bg"
+                android:hint="2003"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#FFFFFF"
+                android:textColorHint="#40FFFFFF"
+                android:textSize="18sp"
+                android:padding="12dp"
+                android:gravity="center" />
+
+            <!-- Battery Optimization -->
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/batteryOptSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Battery Optimization Exempt"
+                android:textColor="#FFFFFF" />
+
+            <!-- Clear History -->
+            <TextView
+                android:id="@+id/clearHistoryButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="#20FF0000"
+                android:gravity="center"
+                android:padding="12dp"
+                android:text="Clear Conversation History"
+                android:textColor="#FF4444"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="32dp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:background="@drawable/btn_save_bg"
+        android:text="Save Settings"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
